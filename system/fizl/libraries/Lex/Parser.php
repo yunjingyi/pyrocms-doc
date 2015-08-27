@@ -1,6 +1,6 @@
 <?php
 /**
- * Part of the Lex Template Parser.
+ * Part of the Lex Template Parser.  正则玩法
  *
  * @author     Dan Horrigan
  * @license    MIT License

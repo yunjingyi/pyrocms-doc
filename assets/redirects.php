@@ -1,7 +1,7 @@
 <?php
 
 
-// Old documentation routes
+// Old documentation routes 路由映射 2015-06-06
 $redirects = array(
 
 	'general'  							=> 'about',

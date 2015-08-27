@@ -52,10 +52,10 @@ class Fizl extends CI_Controller {
 		$this->load->library('Plugin');
 		$this->load->library('Parse');
 		
-		include(APPPATH.'libraries/Lex/Autoloader.php');
+		include(APPPATH.'libraries/Lex/Autoloader.php'); //为了使用lex parser。
 		Lex_Autoloader::register();
 		
-		$this->load->helper(array('file', 'url'));
+		$this->load->helper(array('file', 'url')); //加载file url 2个helper
 
 		// -------------------------------------
 		// Configs
@@ -76,16 +76,16 @@ class Fizl extends CI_Controller {
 			'current_url'	=> current_url(),
 			'site_url'		=> site_url(),
 			'base_url'		=> $this->config->item('base_url')
-		);
+		); //请求url
 
 		// Get them configs
 		$raw_configs = require_once(FCPATH.'config.php');
-		
+
 		foreach($config as $key => $var)
 		{
 			$this->vars[$key] = $var;
 		}
-		
+
 		// Set the site folder as a constant
 		define('SITE_FOLDER', $this->vars['site_folder']);
 
@@ -126,12 +126,12 @@ class Fizl extends CI_Controller {
 		if ($segments) $file_path .= '/'.implode('/', $segments);
 								
 		// -------------------------------------
-		// Find file
+		// Find file 整个c就是url定位content内md文件 然后渲染到模板
 		// -------------------------------------
 
 		// We just want two things
 		$file_elems = array_slice(explode('.', $file), 0, 2);
-				
+
 		$supported_files = array('html', 'md', 'textile');
 		$file_ext = NULL;
 		
@@ -156,7 +156,7 @@ class Fizl extends CI_Controller {
 				}
 			}
 		}
-								
+
 		// -------------------------------------
 		// Set headers
 		// -------------------------------------
@@ -255,7 +255,7 @@ class Fizl extends CI_Controller {
 		// Prep and Output Content	
 		// -------------------------------------
 		
-		$parser = new Lex_Parser();
+		$parser = new Lex_Parser(); //Lex来解析html模板 todo 熟悉
 		$parser->scope_glue(':');
 		
 		echo $parser->parse($template, $this->vars, array($this->parse, 'callback'), TRUE);
